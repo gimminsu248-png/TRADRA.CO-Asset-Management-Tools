@@ -29,6 +29,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         gtag('config', 'G-TE8B1LE98S');
                     `}
                 </Script>
+                {/* Naver Analytics */}
+                <Script type="text/javascript" src="//wcs.pstatic.net/wcslog.js" strategy="afterInteractive" />
+                <Script id="naver-analytics" strategy="afterInteractive">
+                    {`
+                        if(!wcs_add) var wcs_add = {};
+                        wcs_add["wa"] = "314fcbc8b4218a";
+                        if(window.wcs) {
+                            wcs_do();
+                        }
+                    `}
+                </Script>
             </head>
             <ClientLayout>{children}</ClientLayout>
         </html>
