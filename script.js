@@ -536,14 +536,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const futuresToggleGuide = document.getElementById('futures_toggle_guide');
     const futuresGuideContent = document.getElementById('futures_guide_content');
 
-    // [사용자 요청] 쿠팡 파트너스 공식 위젯 HTML (Access Denied 해결용)
+    // [사용자 요청] 쿠팡 파트너스 원본 HTML 스니펫 (랜덤 갱신)
     const COUPANG_SNIPPETS = [
-        '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFd&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-        '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFp&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-        '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFI&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-        '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFT&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-        '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziF2&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-        '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziF7&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>'
+        '<iframe src="https://coupa.ng/clziFd" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+        '<iframe src="https://coupa.ng/clziFp" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+        '<iframe src="https://coupa.ng/clziFI" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+        '<iframe src="https://coupa.ng/clziFT" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+        '<iframe src="https://coupa.ng/clziF2" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+        '<iframe src="https://coupa.ng/clziF7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>'
     ];
 
     function updateCoupangAds() {

@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from 'react';
 
 const COUPANG_SNIPPETS = [
-    '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFd&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-    '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFp&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-    '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFI&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-    '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziFT&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-    '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziF2&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
-    '<iframe src="https://ads-partners.coupang.com/widgets.html?id=clziF7&format=vertical&width=120&height=240" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>'
+    '<iframe src="https://coupa.ng/clziFd" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+    '<iframe src="https://coupa.ng/clziFp" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+    '<iframe src="https://coupa.ng/clziFI" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+    '<iframe src="https://coupa.ng/clziFT" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+    '<iframe src="https://coupa.ng/clziF2" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>',
+    '<iframe src="https://coupa.ng/clziF7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>'
 ];
 
 export default function CoupangAds() {
