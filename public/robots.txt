@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_next/
+
+Sitemap: https://tradra.co/sitemap.xml
+Sitemap: https://tradra-co-asset-management-tools.pages.dev/sitemap.xml

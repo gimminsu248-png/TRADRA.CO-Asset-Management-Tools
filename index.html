@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TE8B1LE98S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-TE8B1LE98S');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-7744247134223275">
+
+    <!-- [SEO] 기본 메타 태그 -->
+    <title>TRANDRA.CO 종합 관리 도구 - 코인/주식/선물/복리 계산기</title>
+    <meta name="description"
+        content="코인 선물 레버리지, 주식 물타기 평단가, 해외선물 증거금, 복리 이자, 켈리 공식, 분할 매수/매도 계산기. 성공적인 투자를 위한 필수 트레이딩 툴 모음입니다.">
+    <meta name="keywords"
+        content="코인 계산기, 주식 물타기 계산기, 선물 레버리지 계산기, 복리 계산기, 켈리 공식, 평단가 계산기, 비트코인 선물, 해외선물 증거금, CFD 계산기, 트레이딩 툴, 수익률 계산">
+    <meta name="author" content="TRANDRA">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tradra-co-asset-management-tools.pages.dev/">
+
+    <!-- [SEO] 소유권 확인 및 RSS -->
+    <meta name="naver-site-verification" content="c130f37dc6883c63106d19c90c940d53477321d8">
+    <link rel="alternate" type="application/rss+xml" title="TRANDRA.CO RSS Feed" href="/rss.xml">
+
+    <!-- [SEO] Open Graph (소셜 공유 최적화) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TRANDRA.CO 종합 자산 관리 도구">
+    <meta property="og:description" content="코인, 주식, 선물, 복리, 켈리 등 다양한 트레이딩 계산기를 한곳에서 이용하세요.">
+    <meta property="og:url" content="https://tradra-co-asset-management-tools.pages.dev/">
+    <meta property="og:site_name" content="TRANDRA.CO">
+
+    <!-- [SEO] 구조화 데이터 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "TRANDRA.CO 종합 자산 관리 도구",
+      "url": "https://tradra-co-asset-management-tools.pages.dev/",
+      "description": "코인 선물, 주식 물타기, 해외선물, 복리, 켈리 공식 등 트레이딩 필수 계산기 모음.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <script type="application/ld+json" id="dynamic-json-ld"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744247134223275"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main class="calculator-container">
+        <div class="share-container">
+            <button id="share-btn" class="icon-btn" title="공유하기">🔗</button>
+            <select id="lang-selector" class="lang-select">
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="en">🇺🇸 English</option>
+            </select>
+        </div>
+        <div class="theme-switcher">
+            <input type="checkbox" id="theme-toggle">
+            <label for="theme-toggle" class="slider"></label>
+            <div id="theme-label" class="theme-label">Light</div>
+        </div>
+
+        <header>
+            <h1 data-i18n="app_title" id="app-title">TRANDRA.CO 종합 관리 도구</h1>
+        </header>
+
+        <nav class="tabs">
+            <a href="/crypto-futures" class="tab-link active" data-tab="tab1" data-i18n="tab1">코인 포지션/리스크 계산기</a>
+            <a href="/stock-position" class="tab-link" data-tab="tab2" data-i18n="tab2">주식 포지션/리스크 계산기</a>
+            <a href="/cfd-calculator" class="tab-link" data-tab="tab3" data-i18n="tab3">CFD 포지션/리스크 계산기</a>
+            <a href="/compound-interest" class="tab-link" data-tab="tab4" data-i18n="tab4">복리 계산기</a>
+            <a href="/overseas-futures" class="tab-link" data-tab="tab5" data-i18n="tab5">해외선물 포지션/리스크 계산기</a>
+            <a href="/kelly-criterion" class="tab-link" data-tab="tab6" data-i18n="tab6">켈리 공식 계산기</a>
+            <a href="/average-cost" class="tab-link" data-tab="tab7" data-i18n="tab7">평단가 & 불타기 계산기</a>
+            <a href="/partial-exit" class="tab-link" data-tab="tab8" data-i18n="tab8">분할 청산(TP/SL) 계산기</a>
+            <a href="/strategy-simulator" class="tab-link" data-tab="tab9" data-i18n="tab9">전략 시뮬레이터</a>
+        </nav>
+
+        <!-- Tab 1: 선물 계산기 -->
+        <section id="tab1" class="tab-content active">
+            <div class="section">
+                <div class="section-title" data-i18n="currency_settings">[통화 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="futures_currency" value="USD" checked> USD ($)</label>
+                    <label><input type="radio" name="futures_currency" value="EUR"> EUR (€)</label>
+                    <label><input type="radio" name="futures_currency" value="JPY"> JPY (¥)</label>
+                    <label><input type="radio" name="futures_currency" value="CNY"> CNY (¥)</label>
+                    <label><input type="radio" name="futures_currency" value="KRW"> KRW (₩)</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <button id="futures_toggle_guide" class="toggle-btn" data-i18n="guide_futures_btn">🔽 코인 선물 계산기 사용법
+                    (가이드)</button>
+                <div id="futures_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_futures_content">
+                    <p><strong>1. 리스크 관리 핵심</strong><br>
+                        진입가와 손절가를 입력하고 '로스 허용금액'을 설정하면, 손절 시 딱 그 금액만큼만 잃도록 <strong>적정 진입 물량</strong>을 계산해줍니다.</p>
+                    <p><strong>2. 수수료 고려</strong><br>
+                        거래소의 지정가/시장가 수수료율을 입력하면, 진입과 청산 시 발생하는 수수료를 미리 계산하여 순수익을 보여줍니다.</p>
+                    <p><strong>3. 레버리지</strong><br>
+                        레버리지는 증거금 계산에만 영향을 미치며, 실제 손실액은 '로스 허용금액'으로 고정됩니다.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="basic_settings">[기본 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="risk_amount">로스 허용금액</label>
+                    <input type="number" id="risk" value="50">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="leverage">레버리지 (x)</label>
+                    <input type="number" id="lev" value="10">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="entry_price">진입 가격</label>
+                    <input type="number" id="entry" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="sl_price">손절 가격</label>
+                    <input type="number" id="sl" value="0">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="fee_settings">[수수료 및 주문]</div>
+                <div class="input-group">
+                    <label data-i18n="maker_fee">지정가 수수료 (%)</label>
+                    <input type="number" id="maker_fee" value="0.02" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="taker_fee">시장가 수수료 (%)</label>
+                    <input type="number" id="taker_fee" value="0.05" step="0.01">
+                </div>
+
+                <div class="radio-group">
+                    <span data-i18n="entry_type">진입:</span>
+                    <label><input type="radio" name="entry_fee_type" value="taker" checked> <span
+                            data-i18n="market">시장가</span></label>
+                    <label><input type="radio" name="entry_fee_type" value="maker"> <span
+                            data-i18n="limit">지정가</span></label>
+                </div>
+                <div class="radio-group">
+                    <span data-i18n="exit_type">청산:</span>
+                    <label><input type="radio" name="exit_fee_type" value="taker"> <span
+                            data-i18n="market">시장가</span></label>
+                    <label><input type="radio" name="exit_fee_type" value="maker" checked> <span
+                            data-i18n="limit">지정가</span></label>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="tp_target">[익절 타겟]</div>
+                <div class="input-group">
+                    <label data-i18n="final_rr">최종 목표 손익비(R)</label>
+                    <input type="number" id="final_rr" value="3.0" step="0.1">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="use_partial" checked>
+                    <label for="use_partial" data-i18n="use_partial">✂️ 분할 익절 사용하기</label>
+                </div>
+
+                <div id="partial_settings" class="partial-settings">
+                    <div class="input-group">
+                        <label data-i18n="tp1_ratio">1차 비중(%)</label>
+                        <input type="number" id="tp1_pct" value="50">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="tp1_rr">1차 손익비(R)</label>
+                        <input type="number" id="tp1_rr" value="1.0" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <button id="reset-btn-futures" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn" data-i18n="calc_btn">🚀 계산 실행</button>
+
+            <div class="result-area">
+                <textarea id="result" readonly placeholder="결과가 여기에 표시됩니다."
+                    data-i18n-placeholder="result_placeholder"></textarea>
+            </div>
+        </section>
+
+        <!-- Tab 2: 주식 계산기 -->
+        <section id="tab2" class="tab-content">
+            <div class="section">
+                <div class="section-title" data-i18n="currency_settings">[통화 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="stock_currency" value="USD" checked> USD ($)</label>
+                    <label><input type="radio" name="stock_currency" value="EUR"> EUR (€)</label>
+                    <label><input type="radio" name="stock_currency" value="JPY"> JPY (¥)</label>
+                    <label><input type="radio" name="stock_currency" value="CNY"> CNY (¥)</label>
+                    <label><input type="radio" name="stock_currency" value="KRW"> KRW (₩)</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <button id="stock_toggle_guide" class="toggle-btn" data-i18n="guide_stock_btn">🔽 주식 포지션 계산기 사용법
+                    (가이드)</button>
+                <div id="stock_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_stock_content">
+                    <p><strong>1. 자금 관리</strong><br>
+                        '나의 증거금'과 '로스 허용 금액'을 입력하세요. 손절가에 도달했을 때 허용 금액만큼만 손실을 보게 되는 <strong>매수 수량</strong>을 알려줍니다.</p>
+                    <p><strong>2. 통화 변환</strong><br>
+                        미국 주식(USD)이나 한국 주식(KRW) 등 통화를 선택하면 결과값이 해당 통화 기호로 표시됩니다.</p>
+                    <p><strong>3. 손익비(R)</strong><br>
+                        손실 대비 수익 비율(R)을 설정하여 목표가를 자동으로 계산해보세요.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="basic_settings">[기본 매매 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="my_margin">나의 증거금 금액</label>
+                    <input type="number" id="stock_margin" value="1000">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="risk_amount">로스 허용 금액</label>
+                    <input type="number" id="stock_risk" value="100">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="entry_price">진입 가격</label>
+                    <input type="number" id="stock_entry" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="sl_price">손절 가격</label>
+                    <input type="number" id="stock_sl" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="final_rr">최종 목표 손익비(R)</label>
+                    <input type="number" id="stock_final_rr" value="3.0" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="fee_percent">수수료 (%)</label>
+                    <input type="number" id="stock_fee" value="0.15" step="0.01">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="partial_tp_option">[분할 익절 옵션]</div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="stock_use_partial">
+                    <label for="stock_use_partial" data-i18n="use_partial">✂️ 분할 익절 사용하기</label>
+                </div>
+                <div id="stock_partial_settings" class="partial-settings">
+                    <div class="input-group">
+                        <label data-i18n="tp1_ratio">1차 익절 비중 (%)</label>
+                        <input type="number" id="stock_tp1_pct" value="50">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="tp1_rr">1차 목표 손익비(R)</label>
+                        <input type="number" id="stock_tp1_rr" value="1.0" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <button id="reset-btn-stock" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-stock" data-i18n="calc_btn">🚀 계산 실행</button>
+
+            <div class="result-area">
+                <textarea id="result-stock" readonly placeholder="결과가 여기에 표시됩니다."></textarea>
+            </div>
+        </section>
+
+        <!-- Tab 3: 메타 프로 계산기 -->
+        <section id="tab3" class="tab-content">
+            <div class="section">
+                <button id="meta_toggle_guide" class="toggle-btn" data-i18n="guide_meta_btn">🔽 CFD 계산기 사용법
+                    (가이드)</button>
+                <div id="meta_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_meta_content">
+                    <p><strong>1. 계약 크기(Contract Size) 중요성</strong><br>
+                        CFD/Forex는 종목마다 1랏(Lot)의 단위가 다릅니다. (예: 유로달러 100,000, 금 100). 종목을 선택하면 자동으로 설정되지만, 브로커마다 다를 수 있으니
+                        확인하세요.</p>
+                    <p><strong>2. 증거금 점유율</strong><br>
+                        총 계좌 증거금 대비 진입하려는 포지션이 차지하는 비율을 계산하여, 무리한 진입을 방지합니다.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="account_symbol_settings">[계좌 및 종목 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="total_margin">총 계좌 증거금 ($)</label>
+                    <input type="number" id="meta_total_margin" value="10000">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="symbol_type">종목 종류</label>
+                    <select id="meta_symbol">
+                        <option value="100000">Forex (100k)</option>
+                        <option value="100">Gold (100oz)</option>
+                        <option value="1000">Oil / Silver (1000)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label data-i18n="contract_size">계약 크기 (Contract Size)</label>
+                    <input type="number" id="meta_contract" value="100000">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="risk_leverage">[리스크 및 레버리지]</div>
+                <div class="input-group">
+                    <label data-i18n="risk_amount">손절 허용액 ($)</label>
+                    <input type="number" id="meta_risk" value="100">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="leverage">레버리지 (x)</label>
+                    <input type="number" id="meta_lev" value="100">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="position_settings">[포지션 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="meta_side" value="Long" checked> <span data-i18n="long_simple">매수
+                            (Long)</span></label>
+                    <label><input type="radio" name="meta_side" value="Short"> <span data-i18n="short_simple">매도
+                            (Short)</span></label>
+                </div>
+                <div class="input-group">
+                    <label data-i18n="entry_price">진입 가격</label>
+                    <input type="number" id="meta_entry" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="sl_price">손절 가격 (SL)</label>
+                    <input type="number" id="meta_sl" value="0">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="tp_target">[익절 타겟 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="final_rr">최종 목표 손익비(R)</label>
+                    <input type="number" id="meta_final_rr" value="2.0" step="0.1">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="meta_use_partial" checked>
+                    <label for="meta_use_partial" data-i18n="use_partial">✂️ 분할 익절 사용하기</label>
+                </div>
+                <div id="meta_partial_settings" class="partial-settings">
+                    <div class="input-group">
+                        <label data-i18n="tp1_ratio">1차 비중 (%)</label>
+                        <input type="number" id="meta_split_ratio" value="50">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="tp1_rr">1차 손익비 (R)</label>
+                        <input type="number" id="meta_split_rr" value="1.0" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <button id="reset-btn-meta" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-meta" data-i18n="calc_analyze_btn">🚀 계산 및 리스크 분석</button>
+
+            <div class="result-area">
+                <textarea id="result-meta" readonly placeholder="결과가 여기에 표시됩니다."></textarea>
+            </div>
+        </section>
+
+        <!-- Tab 4: 복리 계산기 -->
+        <section id="tab4" class="tab-content">
+            <div class="section">
+                <div class="section-title" data-i18n="currency_settings">[통화 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="comp_currency" value="USD" checked> USD ($)</label>
+                    <label><input type="radio" name="comp_currency" value="EUR"> EUR (€)</label>
+                    <label><input type="radio" name="comp_currency" value="JPY"> JPY (¥)</label>
+                    <label><input type="radio" name="comp_currency" value="CNY"> CNY (¥)</label>
+                    <label><input type="radio" name="comp_currency" value="KRW"> KRW (₩)</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <button id="comp_toggle_guide" class="toggle-btn" data-i18n="guide_comp_btn">🔽 복리 계산기 사용법
+                    (가이드)</button>
+                <div id="comp_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_comp_content">
+                    <p><strong>1. 복리 효과 시뮬레이션</strong><br>
+                        초기 투자금과 목표 수익률(일/주/월)을 입력하여 시간이 지남에 따라 자산이 어떻게 불어나는지 확인하세요.</p>
+                    <p><strong>2. 현실적인 시나리오</strong><br>
+                        '특화 기능'을 펼쳐서 <strong>추가 입금</strong>이나 <strong>수익 인출</strong>, 그리고 승률에 따른 <strong>손실
+                            시뮬레이션</strong>을 적용해보면 더 현실적인 결과를 볼 수 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="basic_invest_settings">[기본 투자 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="initial_principal">초기 투자금 (원금)</label>
+                    <input type="number" id="comp_principal" value="1000000">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="target_rate">목표 수익률 (%)</label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="comp_rate" value="1" style="width: 60px;">
+                        <select id="comp_period_unit" style="width: 80px;">
+                            <option value="daily" data-i18n="daily">일간</option>
+                            <option value="weekly" data-i18n="weekly">주간</option>
+                            <option value="monthly" data-i18n="monthly">월간</option>
+                            <option value="yearly" data-i18n="yearly">연간</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label data-i18n="invest_duration">투자 기간</label>
+                    <input type="number" id="comp_duration" value="30">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="comp_use_add">
+                    <label for="comp_use_add" data-i18n="use_add_deposit">추가 입금액 설정</label>
+                </div>
+                <div id="comp_add_settings" class="partial-settings" style="display:none;">
+                    <div class="input-group">
+                        <label data-i18n="deposit_per_cycle">1회당 입금액</label>
+                        <div style="display:flex; gap:5px;">
+                            <input type="number" id="comp_add_amt" value="0" style="width: 80px;">
+                            <select id="comp_add_unit" style="width: 80px;">
+                                <option value="daily" data-i18n="daily">일간</option>
+                                <option value="weekly" data-i18n="weekly">주간</option>
+                                <option value="monthly" selected data-i18n="monthly">월간</option>
+                                <option value="yearly" data-i18n="yearly">연간</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <button id="comp_toggle_advanced" class="toggle-btn" data-i18n="advanced_features_btn">🔽 특화 기능
+                    (시뮬레이션/인출) 펼치기</button>
+                <div id="comp_advanced_settings" class="partial-settings" style="display:none; margin-top:10px;">
+                    <div class="section-title" style="font-size:0.9em;" data-i18n="loss_sim">[손실 확률 시뮬레이션]</div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="comp_use_sim">
+                        <label for="comp_use_sim" data-i18n="use_winrate_sim">승률 기반 시뮬레이션 적용</label>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="win_rate">승률 (%)</label>
+                        <input type="number" id="comp_win_rate" value="50">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="loss_rate_per_loss">손실 시 손실률 (%)</label>
+                        <input type="number" id="comp_loss_rate" value="1">
+                    </div>
+                    <p style="font-size:0.8em; color:#888;" data-i18n="comp_note">* 수익률은 위 '목표 수익률'을 따릅니다.</p>
+
+                    <div class="section-title" style="font-size:0.9em; margin-top:15px;" data-i18n="mdd_analysis">
+                        [MDD(최대 낙폭) 분석]</div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="comp_use_mdd">
+                        <label for="comp_use_mdd" data-i18n="run_mdd_sim">MDD 시뮬레이션 실행</label>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="mdd_limit">허용 MDD 한계 (%)</label>
+                        <input type="number" id="comp_mdd_limit" value="20">
+                    </div>
+
+                    <div class="section-title" style="font-size:0.9em; margin-top:15px;" data-i18n="withdraw_settings">
+                        [인출금 설정]</div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="comp_use_withdraw">
+                        <label for="comp_use_withdraw" data-i18n="withdraw_profits">수익금 인출</label>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="withdraw_ratio">수익의 인출 비율 (%)</label>
+                        <input type="number" id="comp_withdraw_rate" value="50">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="comp_use_target">
+                    <label for="comp_use_target" data-i18n="calc_target_period">🎯 목표 자산까지 남은 기간 역산</label>
+                </div>
+                <div id="comp_target_settings" class="partial-settings" style="display:none;">
+                    <div class="input-group">
+                        <label data-i18n="target_asset_amt">목표 자산 금액</label>
+                        <input type="number" id="comp_target_amt" value="100000000">
+                    </div>
+                </div>
+            </div>
+
+            <button id="reset-btn-comp" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-comp" data-i18n="calc_comp_btn">🚀 복리 계산 실행</button>
+
+            <div id="comp-result-area" class="result-area" style="display:none;">
+                <textarea id="result-comp" readonly style="height:150px; margin-bottom:15px;"></textarea>
+
+                <div class="view-controls" style="margin-bottom: 15px; text-align: center;">
+                    <label style="margin-right: 15px; cursor: pointer;"><input type="checkbox" id="comp-view-proj"
+                            checked> <span data-i18n="view_proj">📈 예상 추이 보기</span></label>
+                    <label id="comp-view-sim-container" style="display:none; cursor: pointer;"><input type="checkbox"
+                            id="comp-view-sim" checked> <span data-i18n="view_sim">🎲 시뮬레이션 보기</span></label>
+                    <label id="comp-view-mdd-container" style="display:none; cursor: pointer; margin-left: 15px;"><input
+                            type="checkbox" id="comp-view-mdd" checked> <span data-i18n="view_mdd">📉 MDD 시뮬레이션
+                            보기</span></label>
+                </div>
+
+                <div class="chart-container" style="position: relative; height:250px; width:100%; margin-bottom:20px;">
+                    <canvas id="compChart"></canvas>
+                </div>
+
+                <div class="table-container">
+                    <table id="comp-table" class="result-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="period">기간</th>
+                                <th class="col-proj" data-i18n="total_asset">총 자산</th>
+                                <th class="col-proj" data-i18n="profit_amt">수익금</th>
+                                <th class="col-proj" data-i18n="profit_rate">수익률</th>
+                                <th class="col-sim" style="display:none;" data-i18n="sim_asset">시뮬레이션 자산</th>
+                                <th class="col-mdd" style="display:none;" data-i18n="mdd_asset">MDD 시뮬레이션 자산</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 5: 해외선물 계산기 -->
+        <section id="tab5" class="tab-content">
+            <div class="section">
+                <button id="fut_toggle_guide" class="toggle-btn" data-i18n="guide_fut_btn">🔽 해외선물 계산기 사용법
+                    (가이드)</button>
+                <div id="fut_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_fut_content">
+                    <p><strong>1. 틱 가치(Tick Value)</strong><br>
+                        해외선물은 종목마다 1포인트(또는 틱)의 가치가 정해져 있습니다. 종목을 선택하면 자동으로 적용됩니다. (예: NQ $20, ES $50)</p>
+                    <p><strong>2. 계약 수 산출</strong><br>
+                        설정한 '손절 허용액' 안에서 운용 가능한 최대 계약 수를 계산해줍니다. 리스크를 넘지 않는 '보수적 진입' 수량을 권장합니다.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="symbol_account_settings">[종목 및 계좌 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="symbol_cme">거래 종목 (CME)</label>
+                    <select id="fut_symbol">
+                        <option value="50">ES - E-mini S&P 500 ($50)</option>
+                        <option value="5">MES - Micro S&P 500 ($5)</option>
+                        <option value="20">NQ - E-mini Nasdaq 100 ($20)</option>
+                        <option value="2">MNQ - Micro Nasdaq 100 ($2)</option>
+                        <option value="5">YM - E-mini Dow ($5)</option>
+                        <option value="0.5">MYM - Micro Dow ($0.5)</option>
+                        <option value="50">RTY - E-mini Russell 2000 ($50)</option>
+                        <option value="5">M2K - Micro Russell 2000 ($5)</option>
+                        <option value="1000">CL - Crude Oil ($1,000)</option>
+                        <option value="100">MCL - Micro Crude Oil ($100)</option>
+                        <option value="100">GC - Gold ($100)</option>
+                        <option value="10">MGC - Micro Gold ($10)</option>
+                        <option value="5000">SI - Silver ($5,000)</option>
+                        <option value="1000">SIL - Micro Silver ($1,000)</option>
+                        <option value="25000">HG - Copper ($25,000)</option>
+                        <option value="2500">MHG - Micro Copper ($2,500)</option>
+                        <option value="10000">NG - Natural Gas ($10,000)</option>
+                        <option value="125000">6E - Euro FX ($125,000)</option>
+                        <option value="12500">M6E - Micro Euro FX ($12,500)</option>
+                        <option value="100000">6A - Australian Dollar ($100,000)</option>
+                        <option value="10000">M6A - Micro AUD ($10,000)</option>
+                        <option value="62500">6B - British Pound ($62,500)</option>
+                        <option value="6250">M6B - Micro GBP ($6,250)</option>
+                        <option value="125000">6J - Japanese Yen ($125,000)</option>
+                        <option value="1000">ZB - 30-Year Bond ($1,000)</option>
+                        <option value="1000">ZN - 10-Year Note ($1,000)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label data-i18n="point_value">1포인트당 가치 ($)</label>
+                    <input type="number" id="fut_multiplier" value="50" readonly
+                        style="background-color: rgba(0,0,0,0.1);">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="total_margin">총 계좌 증거금 ($)</label>
+                    <input type="number" id="fut_total_margin" value="20000">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="risk_position">[리스크 및 포지션]</div>
+                <div class="input-group">
+                    <label data-i18n="risk_amount">손절 허용액 ($)</label>
+                    <input type="number" id="fut_risk" value="500">
+                </div>
+                <div class="radio-group">
+                    <label><input type="radio" name="fut_side" value="Long" checked> <span data-i18n="long_simple">매수
+                            (Long)</span></label>
+                    <label><input type="radio" name="fut_side" value="Short"> <span data-i18n="short_simple">매도
+                            (Short)</span></label>
+                </div>
+                <div class="input-group">
+                    <label data-i18n="entry_price">진입 가격</label>
+                    <input type="number" id="fut_entry" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="sl_price">손절 가격 (SL)</label>
+                    <input type="number" id="fut_sl" value="0">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="tp_target">[익절 타겟 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="final_rr">최종 목표 손익비(R)</label>
+                    <input type="number" id="fut_final_rr" value="2.0" step="0.1">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="fut_use_partial" checked>
+                    <label for="fut_use_partial" data-i18n="use_partial">✂️ 분할 익절 사용하기</label>
+                </div>
+                <div id="fut_partial_settings" class="partial-settings">
+                    <div class="input-group">
+                        <label data-i18n="tp1_qty_contract">1차 청산 수량 (계약)</label>
+                        <input type="number" id="fut_split_qty" value="1">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="tp1_rr">1차 손익비 (R)</label>
+                        <input type="number" id="fut_split_rr" value="1.0" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <button id="reset-btn-fut" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-fut" data-i18n="calc_fut_btn">🚀 해외선물 계산 실행</button>
+
+            <div class="result-area">
+                <textarea id="result-fut" readonly placeholder="결과가 여기에 표시됩니다."></textarea>
+            </div>
+        </section>
+
+        <!-- Tab 6: 켈리 공식 계산기 -->
+        <section id="tab6" class="tab-content">
+            <div class="section">
+                <div class="section-title">[통화 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="kelly_currency" value="USD" checked> USD ($)</label>
+                    <label><input type="radio" name="kelly_currency" value="EUR"> EUR (€)</label>
+                    <label><input type="radio" name="kelly_currency" value="JPY"> JPY (¥)</label>
+                    <label><input type="radio" name="kelly_currency" value="CNY"> CNY (¥)</label>
+                    <label><input type="radio" name="kelly_currency" value="KRW"> KRW (₩)</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <button id="kelly_toggle_guide" class="toggle-btn" data-i18n="guide_kelly_btn">🔽 켈리 공식이란? (초보자
+                    가이드)</button>
+                <div id="kelly_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_kelly_content">
+                    <p><strong>1. 켈리 공식이란?</strong><br>
+                        자신의 승률과 손익비를 바탕으로, 자산을 가장 빠르게 증식시킬 수 있는 <strong>'최적의 투자 비중'</strong>을 수학적으로 계산하는 공식입니다.</p>
+
+                    <p><strong>2. 주요 용어 설명</strong><br>
+                        - <strong>승률 (Win Rate)</strong>: 전체 거래 중 이익을 본 거래의 비율입니다.<br>
+                        - <strong>손익비 (R/R Ratio)</strong>: (평균 이익금 / 평균 손실금) 비율입니다. 예: 100불 잃을 때 200불 벌면 손익비는 2.0입니다.
+                    </p>
+
+                    <p><strong>3. 결과 해석 및 주의사항</strong><br>
+                        - <strong>Full Kelly</strong>: 수학적으로 가장 빠른 성장 속도를 제공하지만, 변동성이 매우 커서 심리적으로 버티기 힘들 수 있습니다.<br>
+                        - <strong>Half / Quarter Kelly</strong>: 계산된 비중의 50% 또는 25%만 진입하는 방식입니다. 수익 속도는 조금 줄어들지만, 파산 위험과
+                        변동성을 획기적으로 낮춰주어 실전 매매에서 권장됩니다.<br>
+                        - <strong>음수 결과</strong>: 계산 결과가 0% 이하로 나온다면, 해당 전략은 장기적으로 손실이 나는 전략이므로 매매를 멈추고 전략을 수정해야 합니다.
+                    </p>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title" data-i18n="basic_settings">[기본 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="total_assets">총 자산</label>
+                    <input type="number" id="kelly_bankroll" value="10000">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="win_rate">승률 (Win Rate %)</label>
+                    <input type="number" id="kelly_win_rate" value="50">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="rr_ratio">손익비 (Reward/Risk Ratio)</label>
+                    <input type="number" id="kelly_rr" value="2.0">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="kelly_fraction_settings">[켈리 비율 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="kelly_fraction" value="1" checked> <span
+                            data-i18n="full_kelly">Full (100%)</span></label>
+                    <label><input type="radio" name="kelly_fraction" value="0.5"> <span data-i18n="half_kelly">Half
+                            (50%)</span></label>
+                    <label><input type="radio" name="kelly_fraction" value="0.25"> <span
+                            data-i18n="quarter_kelly">Quarter (25%)</span></label>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="ruin_analysis">[파산 확률(Risk of Ruin) 분석]</div>
+                <div class="input-group">
+                    <label data-i18n="ruin_loss_rate">파산 간주 손실률 (%)</label>
+                    <input type="number" id="kelly_ruin_loss" value="50">
+                </div>
+                <p style="font-size:0.8em; color:#888; margin-top:5px;" data-i18n="ruin_note">* 설정한 손실률(Drawdown)에 도달할
+                    확률을 계산합니다.</p>
+            </div>
+
+            <button id="reset-btn-kelly" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-kelly" data-i18n="calc_kelly_btn">🚀 켈리 계산 실행</button>
+
+            <div class="result-area">
+                <textarea id="result-kelly" readonly placeholder="결과가 여기에 표시됩니다."></textarea>
+            </div>
+        </section>
+
+        <!-- Tab 7: 평단가 & 불타기 계산기 -->
+        <section id="tab7" class="tab-content">
+            <div class="section">
+                <button id="avg_toggle_guide" class="toggle-btn" data-i18n="guide_avg_btn">🔽 평단가 계산기 사용법 (가이드)</button>
+                <div id="avg_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_avg_content">
+                    <p><strong>1. 평단가 계산 (물타기/불타기)</strong><br>
+                        현재 보유 중인 평단가/수량에 새로운 가격으로 추가 매수했을 때의 최종 평단가를 계산합니다.</p>
+                    <p><strong>2. 목표 평단가 맞추기 (역산)</strong><br>
+                        "평단가를 100원으로 만들고 싶다"면 체크박스를 켜고 목표가를 입력하세요. 현재가 기준으로 몇 주를 더 사야 하는지 계산해줍니다.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">[통화 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="avg_currency" value="USD" checked> USD ($)</label>
+                    <label><input type="radio" name="avg_currency" value="EUR"> EUR (€)</label>
+                    <label><input type="radio" name="avg_currency" value="JPY"> JPY (¥)</label>
+                    <label><input type="radio" name="avg_currency" value="CNY"> CNY (¥)</label>
+                    <label><input type="radio" name="avg_currency" value="KRW"> KRW (₩)</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="current_position">[현재 보유 포지션]</div>
+                <div class="input-group">
+                    <label data-i18n="current_avg">현재 평단가</label>
+                    <input type="number" id="avg_current_price" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="current_qty">보유 수량</label>
+                    <input type="number" id="avg_current_qty" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="market_price">현재 시장가</label>
+                    <input type="number" id="avg_market_price" value="0">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="avg_use_target">
+                    <label for="avg_use_target" data-i18n="calc_target_avg">🎯 목표 평단가 맞추기 (필요 수량 계산)</label>
+                </div>
+
+                <div id="avg_standard_settings">
+                    <div class="input-group">
+                        <label data-i18n="add_entry_price">추가 진입가</label>
+                        <input type="number" id="avg_new_price" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="add_qty">추가 수량</label>
+                        <input type="number" id="avg_new_qty" value="0">
+                    </div>
+                </div>
+
+                <div id="avg_target_settings" style="display:none;">
+                    <div class="input-group">
+                        <label data-i18n="target_avg_price">목표 평단가</label>
+                        <input type="number" id="avg_target_price" value="0">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="avg_integer_mode">
+                        <label for="avg_integer_mode" data-i18n="calc_integer">정수 단위로 계산 (근사치)</label>
+                    </div>
+                    <p style="font-size:0.8em; color:#888; margin-top:5px;" data-i18n="avg_note">* 현재 시장가로 매수 시 목표 평단가를
+                        맞추기 위해 필요한 수량을 계산합니다.</p>
+                </div>
+            </div>
+
+            <button id="reset-btn-avg" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-avg" data-i18n="calc_avg_btn">🚀 평단가 계산 실행</button>
+
+            <div class="result-area">
+                <textarea id="result-avg" readonly placeholder="결과가 여기에 표시됩니다."></textarea>
+            </div>
+        </section>
+
+        <!-- Tab 8: 분할 청산(TP/SL) 계산기 -->
+        <section id="tab8" class="tab-content">
+            <div class="section">
+                <div class="section-title">[통화 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="partial_currency" value="USD" checked> USD ($)</label>
+                    <label><input type="radio" name="partial_currency" value="EUR"> EUR (€)</label>
+                    <label><input type="radio" name="partial_currency" value="JPY"> JPY (¥)</label>
+                    <label><input type="radio" name="partial_currency" value="CNY"> CNY (¥)</label>
+                    <label><input type="radio" name="partial_currency" value="KRW"> KRW (₩)</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <button id="partial_toggle_guide" class="toggle-btn" data-i18n="guide_partial_btn">🔽 분할 청산 계산기 사용법
+                    (가이드)</button>
+                <div id="partial_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_partial_content">
+                    <p><strong>1. 기본 사용법</strong><br>
+                        진입 평단가와 보유 수량을 입력한 후, 원하는 익절(TP) 및 손절(SL) 단계의 체크박스를 켜고 가격과 비중(%)을 설정하세요.</p>
+
+                    <p><strong>2. 금액($)으로 가격 찾기 (역산 기능)</strong><br>
+                        특정 가격이 아닌 <strong>"이 단계에서 100불을 벌고 싶다"</strong>면, 가격 칸을 비우고 <strong>금액($) 칸에 100</strong>을
+                        입력하세요. 계산 버튼을 누르면 해당 수익금이 나오는 가격을 자동으로 찾아줍니다. (손절은 양수로 입력해도 자동으로 손실 처리됩니다.)</p>
+
+                    <p><strong>3. 시나리오 분석</strong><br>
+                        계산 결과에서 익절만 했을 때, 손절만 했을 때, 그리고 <strong>1차 익절 후 나머지가 손절났을 때(혼합)</strong>의 최종 손익을 비교해볼 수 있습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="position_info">[포지션 정보]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="partial_side" value="Long" checked> <span
+                            data-i18n="long_simple">매수 (Long)</span></label>
+                    <label><input type="radio" name="partial_side" value="Short"> <span data-i18n="short_simple">매도
+                            (Short)</span></label>
+                </div>
+                <div class="input-group">
+                    <label data-i18n="entry_avg">진입 평단가</label>
+                    <input type="number" id="partial_entry_price" value="0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="holding_qty">보유 수량</label>
+                    <input type="number" id="partial_total_qty" value="0">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="tp_plan">[분할 익절 (TP) 계획]</div>
+                <div class="input-group">
+                    <label style="display:flex; align-items:center;">
+                        <input type="checkbox" id="partial_tp1_check" checked style="width:auto; margin-right:8px;"> TP
+                        1 (가격 / %)
+                    </label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="partial_tp1_price" placeholder="가격" style="width: 70px;">
+                        <input type="number" id="partial_tp1_pct" placeholder="%" value="30" style="width: 50px;">
+                        <input type="number" id="partial_tp1_amt" placeholder="금액($)" style="width: 70px;">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label style="display:flex; align-items:center;">
+                        <input type="checkbox" id="partial_tp2_check" checked style="width:auto; margin-right:8px;"> TP
+                        2 (가격 / %)
+                    </label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="partial_tp2_price" placeholder="가격" style="width: 70px;">
+                        <input type="number" id="partial_tp2_pct" placeholder="%" value="30" style="width: 50px;">
+                        <input type="number" id="partial_tp2_amt" placeholder="금액($)" style="width: 70px;">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label style="display:flex; align-items:center;">
+                        <input type="checkbox" id="partial_tp3_check" checked style="width:auto; margin-right:8px;"> TP
+                        3 (가격 / %)
+                    </label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="partial_tp3_price" placeholder="가격" style="width: 70px;">
+                        <input type="number" id="partial_tp3_pct" placeholder="%" value="40" style="width: 50px;">
+                        <input type="number" id="partial_tp3_amt" placeholder="금액($)" style="width: 70px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="sl_plan">[분할 손절 (SL) 계획]</div>
+                <div class="input-group">
+                    <label style="display:flex; align-items:center;">
+                        <input type="checkbox" id="partial_sl1_check" checked style="width:auto; margin-right:8px;"> SL
+                        1 (가격 / %)
+                    </label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="partial_sl1_price" placeholder="가격" style="width: 70px;">
+                        <input type="number" id="partial_sl1_pct" placeholder="%" value="100" style="width: 50px;">
+                        <input type="number" id="partial_sl1_amt" placeholder="금액($)" style="width: 70px;">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label style="display:flex; align-items:center;">
+                        <input type="checkbox" id="partial_sl2_check" style="width:auto; margin-right:8px;"> SL 2 (가격 /
+                        %)
+                    </label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="partial_sl2_price" placeholder="가격" style="width: 70px;">
+                        <input type="number" id="partial_sl2_pct" placeholder="%" value="0" style="width: 50px;">
+                        <input type="number" id="partial_sl2_amt" placeholder="금액($)" style="width: 70px;">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label style="display:flex; align-items:center;">
+                        <input type="checkbox" id="partial_sl3_check" style="width:auto; margin-right:8px;"> SL 3 (가격 /
+                        %)
+                    </label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="partial_sl3_price" placeholder="가격" style="width: 70px;">
+                        <input type="number" id="partial_sl3_pct" placeholder="%" value="0" style="width: 50px;">
+                        <input type="number" id="partial_sl3_amt" placeholder="금액($)" style="width: 70px;">
+                    </div>
+                </div>
+            </div>
+
+            <button id="reset-btn-partial" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-partial" data-i18n="calc_partial_btn">🚀 분할 청산 계산 실행</button>
+
+            <div class="result-area">
+                <textarea id="result-partial" readonly placeholder="결과가 여기에 표시됩니다."></textarea>
+            </div>
+        </section>
+
+        <!-- Tab 9: 전략 시뮬레이터 -->
+        <section id="tab9" class="tab-content">
+            <div class="section">
+                <div class="section-title">[통화 설정]</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="strat_currency" value="USD" checked> USD ($)</label>
+                    <label><input type="radio" name="strat_currency" value="EUR"> EUR (€)</label>
+                    <label><input type="radio" name="strat_currency" value="JPY"> JPY (¥)</label>
+                    <label><input type="radio" name="strat_currency" value="CNY"> CNY (¥)</label>
+                    <label><input type="radio" name="strat_currency" value="KRW"> KRW (₩)</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <button id="strat_toggle_guide" class="toggle-btn" data-i18n="guide_strat_btn">🔽 전략 시뮬레이터 사용법
+                    (가이드)</button>
+                <div id="strat_guide_content" class="partial-settings"
+                    style="display:none; margin-top:10px; font-size: 0.9em; line-height: 1.6;"
+                    data-i18n="guide_strat_content">
+                    <p><strong>1. 고정 비율 (Fixed Fraction)</strong><br>
+                        매 거래마다 자산의 일정 비율(%)을 리스크로 거는 방식입니다. 자산이 늘어나면 베팅금도 늘어나 복리 효과를 누릴 수 있습니다.</p>
+                    <p><strong>2. 마틴게일 (Martingale)</strong><br>
+                        손실 시 베팅금을 배수로 늘려 한 번의 승리로 손실을 만회하는 전략입니다. 승률이 낮아도 수익을 낼 수 있지만, 연패 시 파산 위험이 매우 큽니다.</p>
+                    <p><strong>3. 피라미딩 (Pyramiding)</strong><br>
+                        이익이 날 때 베팅금을 늘리는(불타기) 전략입니다. 추세장에서는 큰 수익을 낼 수 있지만, 횡보장에서는 잦은 손절이 발생할 수 있습니다.</p>
+                    <p><strong>4. 그리드 (Grid)</strong><br>
+                        일정 가격 간격으로 매수/매도 주문을 깔아두는 전략입니다. 횡보장(Sine Wave)에서 가장 효율적이며, 추세장에서는 물릴 위험이 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="select_strategy">[전략 선택]</div>
+                <div class="radio-group" style="flex-wrap: wrap; gap: 10px;">
+                    <label><input type="radio" name="strat_type" value="fixed" checked> <span data-i18n="strat_fixed">고정
+                            비율 (Fixed Fraction)</span></label>
+                    <label><input type="radio" name="strat_type" value="martingale"> <span
+                            data-i18n="strat_martingale">마틴게일 (Martingale)</span></label>
+                    <label><input type="radio" name="strat_type" value="pyramiding"> <span
+                            data-i18n="strat_pyramiding">피라미딩 (Pyramiding)</span></label>
+                    <label><input type="radio" name="strat_type" value="grid"> <span data-i18n="strat_grid">그리드
+                            (Grid)</span></label>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" data-i18n="common_settings">[공통 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="start_balance">시작 자산 ($)</label>
+                    <input type="number" id="strat_balance" value="10000">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="iterations">반복 횟수 (매매/틱)</label>
+                    <input type="number" id="strat_iterations" value="100">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="market_condition">시장 상황 (Price Movement)</label>
+                    <select id="strat_market_mode">
+                        <option value="abstract" data-i18n="market_abstract">추상적 확률 (Win Rate 기반)</option>
+                        <option value="random" data-i18n="market_random">랜덤 워크 (Random Walk)</option>
+                        <option value="sine" data-i18n="market_sine">횡보장 (Sine Wave)</option>
+                        <option value="uptrend" data-i18n="market_uptrend">상승장 (Uptrend)</option>
+                        <option value="downtrend" data-i18n="market_downtrend">하락장 (Downtrend)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 1. 고정 비율 설정 -->
+            <div id="strat_fixed_settings" class="section">
+                <div class="section-title" data-i18n="fixed_settings">[고정 비율 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="win_rate">승률 (%)</label>
+                    <input type="number" id="strat_fixed_winrate" value="50">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="rr_ratio">손익비 (R)</label>
+                    <input type="number" id="strat_fixed_rr" value="2.0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="risk_per_trade">1회당 리스크 (%)</label>
+                    <input type="number" id="strat_fixed_risk" value="2">
+                </div>
+
+                <div class="checkbox-group" style="margin-top:10px;">
+                    <input type="checkbox" id="strat_fixed_use_partial">
+                    <label for="strat_fixed_use_partial" data-i18n="use_partial">분할 익절 사용</label>
+                </div>
+                <div id="strat_fixed_partial_settings" class="partial-settings" style="display:none;">
+                    <div class="input-group" style="flex-direction: column; align-items: flex-start; gap: 5px;">
+                        <label style="margin-bottom: 2px;" data-i18n="tp1_ratio_rr">1차 익절 (비중% / R)</label>
+                        <div style="display:flex; gap:5px;">
+                            <input type="number" id="strat_fixed_tp1_ratio" value="50" placeholder="%"
+                                style="width:60px;">
+                            <input type="number" id="strat_fixed_tp1_rr" value="1.0" placeholder="R"
+                                style="width:60px;">
+                        </div>
+                        <div class="checkbox-group" style="margin-top:5px;">
+                            <input type="checkbox" id="strat_fixed_breakeven">
+                            <label for="strat_fixed_breakeven" style="font-size:0.9em;" data-i18n="set_be">1차 익절 후
+                                본절(BE) 설정</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 마틴게일 설정 -->
+            <div id="strat_martingale_settings" class="section" style="display:none;">
+                <div class="section-title" data-i18n="martingale_settings">[마틴게일 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="win_rate">승률 (%)</label>
+                    <input type="number" id="strat_martin_winrate" value="48">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="rr_ratio">손익비 (R)</label>
+                    <input type="number" id="strat_martin_rr" value="1.0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="base_bet">기본 베팅금 ($)</label>
+                    <input type="number" id="strat_martin_base" value="100">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="multiplier">배수 (Multiplier)</label>
+                    <input type="number" id="strat_martin_mult" value="2.0">
+                </div>
+            </div>
+
+            <!-- 3. 피라미딩 설정 -->
+            <div id="strat_pyramiding_settings" class="section" style="display:none;">
+                <div class="section-title" data-i18n="pyramiding_settings">[피라미딩 (Paroli) 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="win_rate">승률 (%)</label>
+                    <input type="number" id="strat_pyra_winrate" value="50">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="rr_ratio">손익비 (R)</label>
+                    <input type="number" id="strat_pyra_rr" value="2.0">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="base_bet">기본 베팅금 ($)</label>
+                    <input type="number" id="strat_pyra_base" value="100">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="multiplier_win">연승 시 증액 배수</label>
+                    <input type="number" id="strat_pyra_mult" value="2.0">
+                </div>
+
+                <div class="checkbox-group" style="margin-top:10px;">
+                    <input type="checkbox" id="strat_pyra_use_partial">
+                    <label for="strat_pyra_use_partial" data-i18n="use_partial">분할 익절 사용</label>
+                </div>
+                <div id="strat_pyra_partial_settings" class="partial-settings" style="display:none;">
+                    <div class="input-group">
+                        <label data-i18n="tp1_ratio_rr">1차 익절 (비중% / R)</label>
+                        <div style="display:flex; gap:5px;">
+                            <input type="number" id="strat_pyra_tp1_ratio" value="50" placeholder="%"
+                                style="width:60px;">
+                            <input type="number" id="strat_pyra_tp1_rr" value="1.0" placeholder="R" style="width:60px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 그리드 설정 -->
+            <div id="strat_grid_settings" class="section" style="display:none;">
+                <div class="section-title" data-i18n="grid_settings">[그리드 봇 설정]</div>
+                <div class="input-group">
+                    <label data-i18n="start_price">시작 가격</label>
+                    <input type="number" id="strat_grid_price" value="1000">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="grid_step">그리드 간격 (Price)</label>
+                    <input type="number" id="strat_grid_step" value="10">
+                </div>
+                <div class="input-group">
+                    <label data-i18n="order_qty">주문당 수량</label>
+                    <input type="number" id="strat_grid_qty" value="1">
+                </div>
+            </div>
+
+            <button id="reset-btn-strat" class="reset-btn" data-i18n="reset_btn">🔄 입력 초기화</button>
+            <button id="calculate-btn-strat" data-i18n="start_sim_btn">🚀 시뮬레이션 시작</button>
+
+            <div class="result-area">
+                <textarea id="result-strat" readonly style="height:120px; margin-bottom:15px;"></textarea>
+                <div class="chart-container" style="position: relative; height:250px; width:100%;">
+                    <canvas id="stratChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="trading-insights" class="section"
+            style="margin-top: 40px; border-top: 2px solid rgba(255, 255, 255, 0.1); padding-top: 30px;">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">글로벌 트레이딩 인사이트 & 마켓 가이드
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div
+                    style="background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                    <h3 style="color: #ffd700; border-bottom: 1px solid rgba(255, 215, 0, 0.3); padding-bottom: 10px;">
+                        📉 자금 관리의 3원칙 (Risk Management)</h3>
+                    <p style="margin-top: 15px; line-height: 1.7; font-size: 0.95em;">
+                        성공적인 트레이더와 실패하는 트레이더의 결정적인 차이는 '자금 관리'에 있습니다. 아무리 높은 승률을 가진 전략이라도 단 한 번의 큰 손실로 파산할 수
+                        있습니다.<br><br>
+                        1. <strong>2% 룰:</strong> 한 번의 매매에서 전체 자산의 2% 이상을 잃지 않도록 진입 물량을 조절하세요.<br>
+                        2. <strong>손익비(R/R):</strong> 최소 1:2 이상의 손익비를 가진 자리에서만 진입하는 습관을 들이세요.<br>
+                        3. <strong>분할 매수/매도:</strong> 시장의 불확실성에 대비해 진입과 청산을 나누어 수행함으로써 평균가를 유리하게 관리하세요.
+                    </p>
+                </div>
+
+                <div
+                    style="background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                    <h3 style="color: #00e676; border-bottom: 1px solid rgba(0, 230, 118, 0.3); padding-bottom: 10px;">
+                        🕯️ 기술적 분석과 심리학</h3>
+                    <p style="margin-top: 15px; line-height: 1.7; font-size: 0.95em;">
+                        차트 패턴과 보조지표는 대중의 심리를 시각화한 것입니다. 하지만 지표보다 중요한 것은 시장 참여자들의 심리적 균형을 이해하는 것입니다.<br><br>
+                        <strong>추세 추종 vs 역추세:</strong> 대다수의 수익은 추세가 형성되었을 때 발생합니다. 횡보장에서는 포지션을 쉬는 것도 훌륭한 전략입니다.<br>
+                        <strong>FOMO 제어:</strong> 급등하는 차트에 뒤늦게 올라타는 행위는 가장 큰 실패 요인입니다. 나만의 진입 타점이 올 때까지 기다리는 인내가 필요합니다.
+                    </p>
+                </div>
+
+                <div
+                    style="background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                    <h3 style="color: #ff5252; border-bottom: 1px solid rgba(255, 82, 82, 0.3); padding-bottom: 10px;">
+                        🛡️ 자산군별 트레이딩 유의사항</h3>
+                    <p style="margin-top: 15px; line-height: 1.7; font-size: 0.95em;">
+                        각 시장은 고유의 변동성과 규칙이 있습니다.<br><br>
+                        <strong>암호화폐:</strong> 365일 24시간 열리는 시장으로, 변동성이 매우 크고 레버리지 사용 시 주의가 필요합니다.<br>
+                        <strong>해외선물:</strong> 틱(Tick) 단위의 가치와 만기일을 반드시 확인해야 합니다. 지수와 원자재의 특성이 각기 다릅니다.<br>
+                        <strong>CFD/외환:</strong> 랏(Lot) 단위의 계산과 증거금 유지율 관리가 핵심입니다.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 30px; text-align: center; padding: 20px; background: rgba(var(--primary-rgb), 0.1); border-radius: 12px;">
+                <p style="font-style: italic; color: #ccc;">
+                    "시장은 우리에게 인내심을 테스트하고, 그 대가로 수익을 준다." - 마크 미너비니
+                </p>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

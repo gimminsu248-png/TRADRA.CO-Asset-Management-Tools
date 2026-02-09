@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>TRADRA 종합 관리 도구</title>
+  <link>https://tradra-co-asset-management-tools.pages.dev/</link>
+  <description>코인, 주식, 선물, 복리, 켈리 등 다양한 트레이딩 계산기 도구 모음</description>
+  <item>
+    <title>TRADRA 서비스 업데이트</title>
+    <link>https://tradra-co-asset-management-tools.pages.dev/</link>
+    <description>종합 자산 관리 계산기 최신 기능이 업데이트되었습니다.</description>
+    <pubDate>Wed, 28 Jan 2026 00:00:00 +0900</pubDate>
+  </item>
+</channel>
+</rss>
