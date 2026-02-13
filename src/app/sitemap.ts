@@ -1,11 +1,12 @@
 // src/app/sitemap.ts
 import { MetadataRoute } from 'next'
+import { PSEO_DATA } from '../lib/seo-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://tradra.co'
 
-    // 향후 카테고리나 블로그 포스트가 늘어나면 여기서 동적으로 생성 가능
-    const routes = [
+    // 기본 정적 경로
+    const staticRoutes = [
         '',
         '/crypto-futures',
         '/stock-position',
@@ -26,5 +27,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: route === '' ? 1 : 0.8,
     }))
 
-    return routes
+    // pSEO 동적 경로 추가
+    const pseoRoutes: MetadataRoute.Sitemap = []
+
+    Object.entries(PSEO_DATA).forEach(([tool, assets]) => {
+        assets.forEach((asset) => {
+            pseoRoutes.push({
+                url: `${baseUrl}/${tool}/${asset.id}`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly' as const,
+                priority: 0.6,
+            })
+        })
+    })
+
+    return [...staticRoutes, ...pseoRoutes]
 }
