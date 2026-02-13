@@ -21,17 +21,17 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                     <a href="/" className="logo text-2xl font-bold tracking-tighter">
                         TRANDRA<span>.CO</span>
                     </a>
-                    
+
                     <div className="hidden md:flex items-center gap-1">
-                        <a href="/crypto-futures" className="nav-link">코인 선물</a>
-                        <a href="/stock-position" className="nav-link">주식 포지션</a>
-                        <a href="/compound-interest" className="nav-link">복리 계산</a>
-                        <a href="/average-cost" className="nav-link">평단가</a>
+                        <a href="/crypto-futures" className="nav-link">{t('nav.cryptoFutures')}</a>
+                        <a href="/stock-position" className="nav-link">{t('nav.stockPosition')}</a>
+                        <a href="/compound-interest" className="nav-link">{t('nav.compoundInterest')}</a>
+                        <a href="/average-cost" className="nav-link">{t('nav.averageCost')}</a>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <select 
-                            value={locale} 
+                        <select
+                            value={locale}
                             onChange={(e) => setLocale(e.target.value as any)}
                             className="bg-transparent text-sm border-none focus:ring-0"
                         >
@@ -55,7 +55,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                         </p>
                     </div>
                     <div>
-                        <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">법적 고지</h4>
+                        <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">{t('footer.disclaimerTitle')}</h4>
                         <ul className="space-y-2 text-sm text-secondary">
                             <li><a href="/privacy">개인정보처리방침</a></li>
                             <li><a href="/terms">이용약관</a></li>
@@ -70,8 +70,16 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                         </ul>
                     </div>
                 </div>
-                <div className="container mt-12 pt-8 border-t text-center text-xs text-secondary">
-                    © 2025 TRANDRA.CO. All rights reserved.
+
+                <div className="container mt-12 pt-8 border-t">
+                    <div className="bg-background/50 p-6 rounded-lg border text-xs text-secondary leading-loose">
+                        <p className="font-bold mb-2 text-foreground">{t('footer.disclaimerTitle')}</p>
+                        <p>{t('footer.disclaimerContent')}</p>
+                    </div>
+
+                    <div className="mt-8 text-center text-xs text-secondary">
+                        © 2025 TRANDRA.CO. {t('footer.rights')}
+                    </div>
                 </div>
             </footer>
         </body>
